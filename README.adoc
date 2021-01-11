@@ -1,0 +1,118 @@
+= Simple WebSocket Client
+:revnumber: 0.1.0
+:toc:
+:sectnums:
+:source-highlighter: prettify
+ifndef::env-github[]
+:icons: font
+:icon-set: far
+endif::[]
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:!sectnums:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+:prj-version: {revnumber}
+
+image:https://img.shields.io/github/license/Axway-API-Management-Plus/ws-client-simple?style=plastic[]
+image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/ws-client-simple?style=plastic[]
+
+
+== About the Tool
+
+The tool is a simple client for WebSocket.
+It simulates multiple client endpoints and sends/received messages to/from a WebSocket server.
+It can be used to test WebSocket listeners of an API Gateway.
+Check Axway API Gateway documentation to https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_policydev/apigw_gw_instances/general_websocket/index.html[configure WebSocket connections].
+
+== Usage
+
+The default behavior is to send a single text message to the `ws://echo.websocket.org` endpoint.
+
+[source,shell,subs="verbatim,attributes"]
+----
+$ java -jar ws-simple-client-{prj-version}-jar-with-dependencies.jar
+INFO  10:29:06.452 - Connect to URI: ws://echo.websocket.org <1>
+INFO  10:29:07.512 - [1]: connected <2>
+INFO  10:29:07.513 - [1]: send - hello (#0) <3>
+INFO  10:29:07.628 - [1]: received - hello (#0) <4>
+INFO  10:29:09.522 - [1]: disconnected - 1 message(s) received <5>
+INFO  10:29:09.528 - all endpoints closed
+----
+<1> Client connects to `ws://echo.websocket.org`
+<2> The ID of the endpoint is shown in brackets.
+Each simulated endpoint has its own identifier.
+<3> Client endpoint sends first message to server.
+<4> Client endpoint received first message from server
+<5> WebSocket closed and client endpoint disconnected
+
+To send two messages to the ws://192.168.56.201:8081/echo with three clients and delay of 500ms execute:
+
+[source,shell,subs="verbatim,attributes"]
+----
+$ java -jar ws-simple-client-{proj-version}-jar-with-dependencies.jar --url ws://192.168.56.201:8081/echo --endpoints 3 --messages 2 --delay 500
+INFO  10:33:07.377 - Connect to URI: ws://192.168.56.201:8081/echo
+INFO  10:33:08.426 - [1]: connected <1>
+INFO  10:33:08.672 - [2]: connected
+INFO  10:33:08.890 - [3]: connected <2>
+INFO  10:33:08.890 - [1]: send - hello (#0)
+INFO  10:33:08.896 - [2]: send - hello (#0)
+INFO  10:33:08.897 - [3]: send - hello (#0)
+INFO  10:33:09.039 - [2]: received - hello (#0)
+INFO  10:33:09.048 - [3]: received - hello (#0)
+INFO  10:33:09.048 - [1]: received - hello (#0)
+INFO  10:33:09.400 - [1]: send - hello (#1)
+INFO  10:33:09.401 - [2]: send - hello (#1)
+INFO  10:33:09.402 - [3]: send - hello (#1)
+INFO  10:33:09.516 - [3]: received - hello (#1)
+INFO  10:33:09.516 - [2]: received - hello (#1)
+INFO  10:33:09.517 - [1]: received - hello (#1)
+INFO  10:33:10.906 - [1]: disconnected - 2 message(s) received
+INFO  10:33:10.907 - [2]: disconnected - 2 message(s) received
+INFO  10:33:10.908 - [3]: disconnected - 2 message(s) received
+INFO  10:33:10.912 - all endpoints closed
+----
+<1> First client endpoint connected to the server
+<2> Up to three endpoints are simulate with this call.
+
+== Installation
+
+For installation just download the latest version of the JAR from the https://github.com/orgs/Axway-API-Management-Plus/packages?repo_name=ws-client-simple[GitHub repository] and execute it (see example below):
+
+.Show help screen
+[source,shell,subs="verbatim,attributes"]
+----
+$ java -jar ws-simple-client-{proj-version}-jar-with-dependencies.jar -h
+Usage: ws-client-simple [options]
+  Options:
+    -h, --help
+      Show help screen.
+    --url
+      Target WebSocket endpoint
+      Default: ws://echo.websocket.org
+    --endpoints
+      Number of parallel client endpoints
+      Default: 1
+    --messages
+      Number of messages to be send to the server
+      Default: 1
+    --delay
+      Delay between sending messages (milliseconds)
+      Default: 1000
+----
+
+
+== Contributing
+Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
+
+== Team
+image:https://raw.githubusercontent.com/Axway-API-Management-Plus/Common/master/img/AxwayLogoSmall.png[Axway Logo] Axway Team
+
+== License
+link:./LICENSE[Apache License 2.0]
