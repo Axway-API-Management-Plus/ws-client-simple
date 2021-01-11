@@ -108,7 +108,7 @@ public class WebSocketClient implements AutoCloseable {
 			int missingMessageCount = ep.getMissingMessageCount();
 			if (missingMessageCount != 0) {
 				succeeded = false;
-				log.warn(missingMessageCount + " messages are missing for endpoint [" + ep.getId() + "]");
+				log.error(missingMessageCount + " messages are missing for endpoint [" + ep.getId() + "]");
 			}
 		}
 
