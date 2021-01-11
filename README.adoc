@@ -1,5 +1,5 @@
 = Simple WebSocket Client
-:revnumber: 0.1.0
+:revnumber: 0.1.1
 :toc:
 :sectnums:
 :source-highlighter: prettify
@@ -18,7 +18,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:prj-version: {revnumber}
+:proj-version: {revnumber}
 
 image:https://img.shields.io/github/license/Axway-API-Management-Plus/ws-client-simple?style=plastic[]
 image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/ws-client-simple?style=plastic[]
@@ -37,7 +37,7 @@ The default behavior is to send a single text message to the `ws://echo.websocke
 
 [source,shell,subs="verbatim,attributes"]
 ----
-$ java -jar ws-simple-client-{prj-version}-jar-with-dependencies.jar
+$ java -jar ws-simple-client-{proj-version}-jar-with-dependencies.jar
 INFO  10:29:06.452 - Connect to URI: ws://echo.websocket.org <1>
 INFO  10:29:07.512 - [1]: connected <2>
 INFO  10:29:07.513 - [1]: send - hello (#0) <3>
@@ -83,7 +83,7 @@ INFO  10:33:10.912 - all endpoints closed
 
 == Installation
 
-For installation just download the latest version of the JAR from the https://github.com/orgs/Axway-API-Management-Plus/packages?repo_name=ws-client-simple[GitHub repository] and execute it (see example below):
+For installation just download the `ws-simple-client-{proj-version}-jar-with-dependencies.jar` file from the https://github.com/orgs/Axway-API-Management-Plus/packages?repo_name=ws-client-simple[GitHub repository] and execute it (see example below):
 
 .Show help screen
 [source,shell,subs="verbatim,attributes"]

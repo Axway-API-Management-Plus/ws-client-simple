@@ -1,5 +1,14 @@
 = Changelog
 
+== Version 0.1.1
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/ws-client-simple/issues/1[#1]
+|Enhancement
+|In case of number of sent messages differ from to number of received message log an error instead of a warning.
+|===
+
 == Version 0.1.0
 [cols="1,2,<10a", options="header"]
 |===
