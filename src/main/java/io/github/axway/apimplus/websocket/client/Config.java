@@ -17,25 +17,39 @@ class Config {
 
 	@Parameter(names = "--delay", description = "Delay between sending messages (milliseconds)", order=5)
 	private long delayMillis = 1000;
+	
+	@Parameter(names = "--rampup", description = "Delay between ramp up a new client endpoint (milliseconds)", order=6) 
+	private long delayRampupMillis = 0;
+	
+	@Parameter(names = "--timeout", description = "", order=7)
+	private long timeoutMillis = 60000;
 
 
 	public String getUrl() {
-		return url;
+		return this.url;
 	}
 
 	public int getEndpointCount() {
-		return endpointCount;
+		return this.endpointCount;
 	}
 
 	public int getMessageCount() {
-		return messageCount;
+		return this.messageCount;
 	}
 
 	public long getDelayMillis() {
-		return delayMillis;
+		return this.delayMillis;
+	}
+	
+	public long getDelayRampupMillis() {
+		return this.delayRampupMillis;
+	}
+	
+	public long getTimeoutMillis() {
+		return this.timeoutMillis;
 	}
 
 	public boolean isHelp() {
-		return help;
+		return this.help;
 	}
 }

@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.websocket.ContainerProvider;
-import javax.websocket.DeploymentException;
-import javax.websocket.WebSocketContainer;
+import jakarta.websocket.ContainerProvider;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.WebSocketContainer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +37,7 @@ public class WebSocketClient implements AutoCloseable {
 				Thread.sleep(cfg.getDelayMillis());
 			}
 
-			Thread.sleep(1000);
+			client.waitForCompletion();
 
 			if (!client.checkMessages()) {
 				rc = 1;
@@ -84,6 +84,9 @@ public class WebSocketClient implements AutoCloseable {
 		// create endpoints
 		for (int i = 0; i < this.config.getEndpointCount(); i++) {
 			this.endpoints.add(new Endpoint(this.container, this.uri));
+			if (this.config.getDelayRampupMillis() > 0 && i < (this.config.getEndpointCount() - 1)) {
+				Thread.sleep(this.config.getDelayRampupMillis());
+			}
 		}
 
 		// check endpoints
@@ -99,6 +102,29 @@ public class WebSocketClient implements AutoCloseable {
 	public void broadcast(String text) throws IOException {
 		for (Endpoint ep : this.endpoints) {
 			ep.sendText(text);
+		}
+	}
+
+	public void waitForCompletion() throws IOException, InterruptedException {
+		long untilTimeMillis = System.currentTimeMillis() + this.config.getTimeoutMillis();
+		boolean completed = false;
+
+		while (!completed && System.currentTimeMillis() < untilTimeMillis) {
+			completed = true;
+			Thread.sleep(500);
+
+			for (Endpoint ep : this.endpoints) {
+				int missingMessageCount = ep.getMissingMessageCount();
+				if (missingMessageCount > 0) {
+					completed = false;
+					break;
+				}
+			}
+		}
+
+		if (!completed) {
+			log.error("wait for completion canceled after timeout of " + this.config.getTimeoutMillis()
+					+ " milliseconds");
 		}
 	}
 

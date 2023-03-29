@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.websocket.ClientEndpoint;
-import javax.websocket.DeploymentException;
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
+import jakarta.websocket.ClientEndpoint;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.OnClose;
+import jakarta.websocket.OnMessage;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.Session;
+import jakarta.websocket.WebSocketContainer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,8 +25,8 @@ public class Endpoint implements AutoCloseable {
 	private final int id;
 	private final Session session;
 
-	private int msgCountReceived = 0;
-	private int msgCountSent = 0;
+	private volatile int msgCountReceived = 0;
+	private volatile int msgCountSent = 0;
 
 	public Endpoint(WebSocketContainer container, URI uri) throws DeploymentException, IOException {
 		this.id = Endpoint.count.incrementAndGet();
