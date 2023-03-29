@@ -1,5 +1,16 @@
 = Changelog
 
+== Version 0.2.2
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|
+|Enhancement
+| * Change default URL to ws://localhost:8025/echo
+* Upgrade to new version of log4j2
+|===
+
+
 == Version 0.1.1
 [cols="1,2,<10a", options="header"]
 |===

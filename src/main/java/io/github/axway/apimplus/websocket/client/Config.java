@@ -7,7 +7,7 @@ class Config {
 	private boolean help = false;
 
 	@Parameter(names = "--url", description = "Target WebSocket endpoint", order=2)
-	private String url = "ws://echo.websocket.org";
+	private String url = "ws://localhost:8025/echo";
 
 	@Parameter(names = "--endpoints", description = "Number of parallel client endpoints", order=3)
 	private int endpointCount = 1;

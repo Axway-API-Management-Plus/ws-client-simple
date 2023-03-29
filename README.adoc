@@ -1,5 +1,5 @@
 = Simple WebSocket Client
-:revnumber: 0.1.1
+:revnumber: 0.2.2
 :toc:
 :sectnums:
 :source-highlighter: prettify
@@ -33,7 +33,8 @@ Check Axway API Gateway documentation to https://docs.axway.com/bundle/axway-ope
 
 == Usage
 
-The default behavior is to send a single text message to the `ws://echo.websocket.org` endpoint.
+The default behavior is to send a single text message to the `ws://localhost:8025/echo` endpoint.
+This is the default endpoint of the https://github.com/Axway-API-Management-Plus/ws-server-simple[simple WebSocket server].
 
 [source,shell,subs="verbatim,attributes"]
 ----
